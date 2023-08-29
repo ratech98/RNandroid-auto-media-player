@@ -1,0 +1,62 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.reactnativeandroidauto">
+
+  <uses-permission android:name="androidx.car.app.NAVIGATION_TEMPLATES"/>
+  <uses-permission android:name="androidx.car.app.MAP_TEMPLATES"/>
+  <uses-permission android:name="androidx.car.app.ACCESS_SURFACE"/>
+   <uses-sdk android:minSdkVersion="23" android:targetSdkVersion="33" />
+  <uses-feature
+    android:name="android.hardware.type.automotive"
+    android:required="true" />
+
+<!--  <uses-sdk tools:overrideLibrary="androidx.car" />-->
+
+  <uses-feature
+    android:name="android.hardware.wifi"
+    android:required="false" />
+  <uses-feature
+    android:name="android.hardware.screen.portrait"
+    android:required="false" />
+  <uses-feature
+    android:name="android.hardware.screen.landscape"
+    android:required="false" />
+
+  <application>
+        <service
+            android:name=".CarService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="androidx.car.app.CarAppService" />
+                <category android:name="androidx.car.app.category.NAVIGATION" />
+            </intent-filter>
+        </service>
+
+      <service
+      android:name=".mediaPlayer.media.MusicService"
+      android:enabled="true"
+      android:exported="true"
+      >
+
+      <intent-filter>
+        <action android:name="android.media.browse.MediaBrowserService" />
+      </intent-filter>
+    </service>
+
+    <receiver android:name="androidx.media.session.MediaButtonReceiver"
+      android:exported="true">
+      <intent-filter>
+        <action android:name="android.intent.action.MEDIA_BUTTON" />
+      </intent-filter>
+    </receiver>
+
+   <provider
+     android:name=".mediaPlayer.media.library.AlbumArtContentProvider"
+
+     android:authorities="com.reactnativeandroidauto"
+     android:exported="true" />
+        <meta-data
+            android:name="androidx.car.app.minCarApiLevel"
+            android:value="1" />
+    </application>
+  <!--      android:authorities="com.reactnativeandroidauto"-->
+</manifest>
